@@ -18,7 +18,7 @@ router.post("/register", function (req, res) {
       return res.redirect("/dashboard");
     }
     passport.authenticate("local")(req, res, function () {
-      res.redirect("/cart");
+      res.redirect("/dashboard");
     });
   });
 });
@@ -26,7 +26,8 @@ router.post("/register", function (req, res) {
 // login ---------------
 router.post("/login", passport.authenticate("local", {
   successRedirect: "/dashboard",
-  failureRedirect: "/dashboard"
+  failureRedirect: "/dashboard",
+  failureFlash:true
 }), function (req, res) { });
 
 

@@ -12,58 +12,67 @@
 <body>
   <%- include('partials/header', { page: page }) %>
 
-    <h2 class="mt-5 d-flex justify-content-center">Welcome to the Home Page</h2>
-    <p class="d-flex justify-content-center">This is the main content.</p>
+    <div class="mt-5 d-flex justify-content-center text-danger">
+      <% if(error.length>0){ %>
+        <p>
+          <%= error %>
+        </p>
+        <% } %>
+    </div>
     <%- include('partials/Register') %>
 
+      <% if (isAuthenticated) { %>
+        <div class="container mt-5">
+          <h2 class="d-flex justify-content-center mb-5">Add Menu Item</h2>
+          <form action="/upload" method="POST" enctype="multipart/form-data" class="row g-3">
 
-      <div class="container mt-5">
-        <h2 class="d-flex justify-content-center mb-5">Add Menu Item</h2>
-        <form action="/upload" method="POST" enctype="multipart/form-data" class="row g-3">
+            <div class="col-md-6">
+              <label for="name" class="form-label">Item Name</label>
+              <input type="text" class="form-control" id="name" name="name" required>
+            </div>
 
-          <div class="col-md-6">
-            <label for="name" class="form-label">Item Name</label>
-            <input type="text" class="form-control" id="name" name="name" required>
-          </div>
+            <div class="col-md-6">
+              <label for="category" class="form-label">Category</label>
+              <select class="form-select" id="category" name="category" required>
+                <option selected disabled value="">Choose...</option>
+                <option value="Starter">Starter</option>
+                <option value="Main Course">Main Course</option>
+                <option value="Dessert">Dessert</option>
+                <option value="Beverages">Beverages</option>
+                <option value="Special">Special</option>
+              </select>
+            </div>
 
-          <div class="col-md-6">
-            <label for="category" class="form-label">Category</label>
-            <select class="form-select" id="category" name="category" required>
-              <option selected disabled value="">Choose...</option>
-              <option value="Starter">Starter</option>
-              <option value="Main Course">Main Course</option>
-              <option value="Dessert">Dessert</option>
-              <option value="Beverages">Beverages</option>
-              <option value="Special">Special</option>
-            </select>
-          </div>
+            <div class="col-12">
+              <label for="description" class="form-label">Description</label>
+              <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+            </div>
 
-          <div class="col-12">
-            <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
-          </div>
+            <div class="col-md-6">
+              <label for="price" class="form-label">Price (INR)</label>
+              <input type="number" class="form-control" id="price" name="price" required>
+            </div>
 
-          <div class="col-md-6">
-            <label for="price" class="form-label">Price (INR)</label>
-            <input type="number" class="form-control" id="price" name="price" required>
-          </div>
+            <div class="col-md-6">
+              <label for="image" class="form-label">Upload Image</label>
+              <input class="form-control" type="file" id="image" name="image" accept="image/*" required>
+            </div>
 
-          <div class="col-md-6">
-            <label for="image" class="form-label">Upload Image</label>
-            <input class="form-control" type="file" id="image" name="image" accept="image/*" required>
-          </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary w-100">Add Item</button>
+            </div>
 
-          <div class="col-12">
-            <button type="submit" class="btn btn-primary w-100">Add Item</button>
-          </div>
+          </form>
+        </div>
+        <% } else { %>
+          <h2 class="mt-5 d-flex justify-content-center text-success">Welcome to the Home Page</h2>
 
-        </form>
-      </div>
+          <p class="d-flex justify-content-center text-success">Please Login Or SignUp</p>
+
+          <% } %>
+            <script src="/javascripts/handling.js"></script>
 
 
-
-
-      <script src="/javascripts/handling.js"></script>
 
 </body>
 
