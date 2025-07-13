@@ -8,11 +8,12 @@ const userSchema = mongoose.Schema({
   email: String,
   restaurantname: String,
   ownername: String,
-  menus: [{ type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem' }]
+  menus: [{ type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem' }],
+
 
 
 });
 
 userSchema.plugin(plm);
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model("User", userSchema);

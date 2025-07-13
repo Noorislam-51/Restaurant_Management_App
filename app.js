@@ -13,6 +13,8 @@ var indexRouter = require('./routes/index');
 var userModel = require('./models/User');
 const authRouter = require('./routes/auth');
 const uploadRouter = require('./routes/menu');
+const cartRouter = require('./routes/cart');
+
 var app = express();
 
 // view engine setup
@@ -42,6 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/', uploadRouter);
+app.use('/', cartRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

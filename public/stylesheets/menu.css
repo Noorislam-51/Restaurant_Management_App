@@ -59,18 +59,7 @@
   border-radius: 4px;
 }
 
-.menu-card {
-  margin: 2rem 5rem;
-  padding: 2rem 2rem;
-  display: grid;
-  grid-template-columns: 30rem 30rem;
-  grid-template-rows: 3rem 3rem 3rem 3rem 3rem;
-  column-gap: 4rem;
-  row-gap: 8rem;
-  /*   row-gap:4rem;
-  justify-content:space-between;
-  align-content:space-between; */
-}
+
 
 .menu-items {
   display: flex;
