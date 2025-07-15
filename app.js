@@ -14,6 +14,7 @@ var userModel = require('./models/User');
 const authRouter = require('./routes/auth');
 const uploadRouter = require('./routes/menu');
 const cartRouter = require('./routes/cart');
+const checkoutRouter = require('./routes/checkout');
 
 var app = express();
 
@@ -45,6 +46,7 @@ app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/', uploadRouter);
 app.use('/', cartRouter);
+app.use('/', checkoutRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

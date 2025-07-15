@@ -4,6 +4,8 @@ const passport = require("passport"); // ✅ ADD THIS: For user authentication
 const userModel = require('../models/User'); // User model
 const MenuItem = require('../models/MenuItem'); // Optional: if using MongoDB for menu items
 const isLoggedIn= require('../middleware/isLoggedIn') // Middleware to check if user is logged in
+const upload = require('../routes/multer'); // Multer setup for handling file uploads
+
 
 // Configure passport-local to use userModel for authentication
 const localStrategy = require("passport-local");
@@ -38,7 +40,24 @@ router.get('/dashboard', function (req, res, next) {
   });
 });
 
-// cart------------------
-// (Your cart routes are assumed to be added separately or will be included later)
+router.post('/upload-qr', isLoggedIn, upload.single('qrCode'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).send('No file uploaded.');
+    }
 
+    // Find the logged-in user using session
+    const user = await userModel.findOne({ username: req.session.passport.user });
+
+     // ✅ Correctly save filename
+    user.qrcode = req.file.filename;
+
+    await user.save(); // Save the QR code to the database
+
+    res.redirect('/dashboard'); // Redirect to dashboard after successful upload
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
 module.exports = router; // Export this router to be used in the main app

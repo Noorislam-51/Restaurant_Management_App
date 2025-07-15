@@ -5,6 +5,8 @@ const isLoggedIn = require('../middleware/isLoggedIn') // Middleware to check if
 
 // GET route to display the cart page
 router.get('/cart', async (req, res) => {
+
+
   const cart = req.session.cart || []; // Get cart from session or initialize empty array
 
   try {

@@ -12,6 +12,17 @@
 <body>
   <%- include('partials/Header', { page: page }) %>
 
+  
+  <form action="/upload-qr" method="POST" enctype="multipart/form-data">
+    <div class="mb-3">
+      <input type="file" name="qrCode" accept="image/*" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Upload / Update QR Code</button>
+  </form>
+
+
+
+
     <div class="mt-5 d-flex justify-content-center text-danger">
       <% if(error.length>0){ %>
         <p>
