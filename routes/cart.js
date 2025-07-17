@@ -22,7 +22,7 @@ router.get('/cart', async (req, res) => {
       };
     });
 
-    res.render('cart', { cartItems }); // Render cart page with item details
+    res.render('cart', { cartItems, page: "cart" }); // Render cart page with item details
   } catch (err) {
     console.log(err); // Log any errors
     res.redirect('/'); // Redirect to home page on error

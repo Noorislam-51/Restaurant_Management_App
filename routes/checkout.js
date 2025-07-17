@@ -7,7 +7,7 @@ const isLoggedIn = require('../middleware/isLoggedIn')
  router.post("/checkout",isLoggedIn,async (req, res) => {
   const user = await userModel.findOne({ username: req.session.passport.user })
   const grandTotal = req.body.total;
-  res.render("checkout", { grandTotal ,user});
+  res.render("checkout", { grandTotal ,user,page:"checkout"});
 });
 
 router.post("/checkout-add", async (req, res) => {
