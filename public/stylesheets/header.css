@@ -1,5 +1,5 @@
 .navbar {
-  height: 80px;
+  height: 12vh;
   background-color: #343a40;
 }
 
@@ -8,8 +8,9 @@
   height: 60px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid white;
+  border: 2px solid rgb(0, 0, 0);
   transition: transform 0.3s ease;
+  background-color: #080d25;
 }
 
 .logo:hover {

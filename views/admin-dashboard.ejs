@@ -12,18 +12,15 @@
 <body>
   <%- include('partials/Header', { page: page }) %>
 
-  
-  <form action="/upload-qr" method="POST" enctype="multipart/form-data">
+
+    <!-- <form action="/upload-qr" method="POST" enctype="multipart/form-data">
     <div class="mb-3">
       <input type="file" name="qrCode" accept="image/*" class="form-control" required>
     </div>
     <button type="submit" class="btn btn-primary">Upload / Update QR Code</button>
-  </form>
+  </form> -->
 
-
-
-
-    <div class="mt-5 d-flex justify-content-center text-danger">
+    <div class="d-flex justify-content-center text-danger">
       <% if(error.length>0){ %>
         <p>
           <%= error %>
@@ -33,50 +30,83 @@
     <%- include('partials/Register') %>
 
       <% if (isAuthenticated) { %>
-        <div class="container mt-5">
-          <h2 class="d-flex justify-content-center mb-5">Add Menu Item</h2>
-          <form action="/upload" method="POST" enctype="multipart/form-data" class="row g-3">
+        <div class="d-flex" style="min-height: 88vh; ">
 
-            <div class="col-md-6">
-              <label for="name" class="form-label">Item Name</label>
-              <input type="text" class="form-control" id="name" name="name" required>
+
+          <!-- ✅ Sidebar (Left side) -->
+          <div class="d-flex flex-column bg-dark text-white p-3 justify-content-between left-content"
+            style="width: 20vw;">
+            <!-- Navigation Links -->
+            <div class="d-flex flex-column justify-content-center" style="flex-grow: 1;">
+              <ul class="nav flex-column text-center">
+                <li class="nav-item mb-3"><a class="nav-link text-white" href="/">MENU</a></li>
+                <li class="nav-item mb-3"><a class="nav-link text-white" href="/cart">CART</a></li>
+                <li class="nav-item mb-3"><a class="nav-link text-white" href="/checkout">CHECKOUT</a></li>
+                <li class="nav-item mb-3"><a class="nav-link text-white" href="#">ORDERS</a></li>
+              </ul>
             </div>
 
-            <div class="col-md-6">
-              <label for="category" class="form-label">Category</label>
-              <select class="form-select" id="category" name="category" required>
-                <option selected disabled value="">Choose...</option>
-                <option value="Starter">Starter</option>
-                <option value="Main Course">Main Course</option>
-                <option value="Dessert">Dessert</option>
-                <option value="Beverages">Beverages</option>
-                <option value="Special">Special</option>
-              </select>
+            <!-- QR Upload -->
+            <div class="mt-auto">
+              <form action="/upload-qr" method="POST" enctype="multipart/form-data">
+                <div class="mb-2">
+                  <input type="file" name="qrCode" accept="image/*" class="form-control form-control-sm" required>
+                </div>
+                <button type="submit" class="btn btn-sm btn-primary w-100">Upload QR</button>
+              </form>
             </div>
+          </div>
 
-            <div class="col-12">
-              <label for="description" class="form-label">Description</label>
-              <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+          <!-- ✅ Right Content (Add Menu Form) -->
+          <div class="flex-grow-1 p-4 bg-light">
+            <div class="container">
+              <h2 class="text-center mt-5 mb-5">Add Menu Item</h2>
+              <form action="/upload" method="POST" enctype="multipart/form-data" class="row g-3" style="max-width: 800px; padding-top: 5vh; margin: auto;">
+
+                <div class="col-md-6">
+                  <label for="name" class="form-label">Item Name</label>
+                  <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="category" class="form-label">Category</label>
+                  <select class="form-select" id="category" name="category" required>
+                    <option selected disabled value="">Choose...</option>
+                    <option value="Starter">Starter</option>
+                    <option value="Main Course">Main Course</option>
+                    <option value="Dessert">Dessert</option>
+                    <option value="Beverages">Beverages</option>
+                    <option value="Special">Special</option>
+                  </select>
+                </div>
+
+                <div class="col-12">
+                  <label for="description" class="form-label">Description</label>
+                  <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="price" class="form-label">Price (INR)</label>
+                  <input type="number" class="form-control" id="price" name="price" required>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="image" class="form-label">Upload Image</label>
+                  <input class="form-control" type="file" id="image" name="image" accept="image/*" required>
+                </div>
+
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary w-100">Add Item</button>
+                </div>
+
+              </form>
             </div>
+          </div>
 
-            <div class="col-md-6">
-              <label for="price" class="form-label">Price (INR)</label>
-              <input type="number" class="form-control" id="price" name="price" required>
-            </div>
-
-            <div class="col-md-6">
-              <label for="image" class="form-label">Upload Image</label>
-              <input class="form-control" type="file" id="image" name="image" accept="image/*" required>
-            </div>
-
-            <div class="col-12">
-              <button type="submit" class="btn btn-primary w-100">Add Item</button>
-            </div>
-
-          </form>
         </div>
+
         <% } else { %>
-          <h2 class="mt-5 d-flex justify-content-center text-success">Welcome to the Home Page</h2>
+          <h2 class="mt-5 d-flex justify-content-center text-success">Welcome to the Dashboard</h2>
 
           <p class="d-flex justify-content-center text-success">Please Login Or SignUp</p>
 

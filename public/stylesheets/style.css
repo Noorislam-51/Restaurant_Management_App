@@ -1,8 +1,9 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
 
-a {
-  color: #00B7FF;
+.left-content {
+  width: 18vw;
+  height: calc(100vh - 12vh); /* Fill the screen below the navbar */
+  position: fixed;
+  top: 12vh; /* Same height as the navbar */
+  left: 0;
+  z-index: 1030;
 }

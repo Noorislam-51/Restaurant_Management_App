@@ -16,8 +16,8 @@
       <% if (page==='dashboard' ) { %>
         <a class="navbar-brand" href="/">
           <img
-            src="https://plus.unsplash.com/premium_photo-1661914978519-52a11fe159a7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bG9nb3xlbnwwfHwwfHx8MA%3D%3D"
-            alt="Logo" class="logo" style="height: 40px; object-fit: contain;">
+            src="/images/logo.png"
+            alt="Logo" class="logo" style=" object-fit: contain;">
         </a>
         <div class="ms-auto d-flex">
           <% if (isAuthenticated) { %>
@@ -31,12 +31,12 @@
 
         <% } else if (page==='menu' ) { %>
           <a class="navbar-brand" href="/dashboard">
-            <img
-              src="https://plus.unsplash.com/premium_photo-1661914978519-52a11fe159a7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bG9nb3xlbnwwfHwwfHx8MA%3D%3D"
-              alt="Logo" class="logo" style="height: 40px; object-fit: contain;">
+             <img
+            src="/images/logo.png"
+            alt="Logo" class="logo" style=" object-fit: contain;">
           </a>
           <div class="ms-auto">
-            
+
             <a href="/cart" class="btn btn-outline- position-relative">
               🛒 Cart
             </a>
@@ -44,10 +44,10 @@
 
 
           <% } else if (page==='cart' ) { %>
-            <a class="navbar-brand">
-              <img
-                src="https://plus.unsplash.com/premium_photo-1661914978519-52a11fe159a7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bG9nb3xlbnwwfHwwfHx8MA%3D%3D"
-                alt="Logo" class="logo" style="height: 40px; object-fit: contain;">
+            <a class="navbar-brand" href="/">
+            <img
+            src="/images/logo.png"
+            alt="Logo" class="logo" style=" object-fit: contain;">
             </a>
             <div class="ms-auto">
               <a href="/" class="btn btn-outline- position-relative">
@@ -55,8 +55,8 @@
               </a>
             </div>
 
-       
-            
+
+
 
             <% } %>
 
