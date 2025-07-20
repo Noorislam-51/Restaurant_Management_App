@@ -7,7 +7,8 @@ const isLoggedIn = require('../middleware/isLoggedIn') // Middleware to check if
 router.get('/cart', async (req, res) => {
 
 
-  const cart = req.session.cart || []; // Get cart from session or initialize empty array
+  const cart = req.session.cart?.items || [];
+  // Get cart from session or initialize empty array
 
   try {
     const itemIds = cart.map(i => i.itemId); // Extract item IDs from the cart
@@ -38,15 +39,33 @@ router.post('/cart/add/:id', async (req, res) => {
     const menuItem = await MenuItem.findById(menuItemId); // Find the menu item in DB
     if (!menuItem) return res.redirect('/'); // If not found, redirect
 
-    if (!req.session.cart) req.session.cart = []; // Initialize cart if it doesn't exist
+    // If no cart exists in session, initialize it as an object
+    if (!req.session.cart) {
+      req.session.cart = {
+        items: [],
+        totalQty: 0,
+        totalPrice: 0
+      };
+    }
 
-    const existingItem = req.session.cart.find(item => item.itemId === menuItemId); // Check if item already exists
+    const cart = req.session.cart;
+    const existingItem = cart.items.find(item => item.itemId === menuItemId);
 
     if (existingItem) {
       existingItem.quantity += quantity; // Increase quantity if already in cart
     } else {
-      req.session.cart.push({ itemId: menuItemId, quantity }); // Add new item to cart
+      cart.items.push({
+        itemId: menuItemId,
+        name: menuItem.menuname,
+        price: menuItem.menuprice,
+        quantity
+      });
     }
+    // Update total quantity and total price
+    cart.totalQty += quantity;
+    cart.totalPrice += menuItem.price * quantity;
+console.log("Cart items at checkout:", cart.items);
+
 
     res.redirect('/cart'); // Redirect to cart page
   } catch (err) {

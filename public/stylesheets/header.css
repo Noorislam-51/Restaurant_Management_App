@@ -1,6 +1,6 @@
 .navbar {
   height: 12vh;
-  background-color: #343a40;
+  background-color: #071a2e;
 }
 
 .logo {
@@ -8,7 +8,7 @@
   height: 60px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid rgb(0, 0, 0);
+  border: 2px solid rgb(255, 255, 255);
   transition: transform 0.3s ease;
   background-color: #080d25;
 }

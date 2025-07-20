@@ -42,6 +42,25 @@ router.post('/upload', isLoggedIn, upload.single('image'), async (req, res) => {
   }
 });
 
-// upload------------
 
+router.post('/upload-qr', isLoggedIn, upload.single('qrCode'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).send('No file uploaded.');
+    }
+
+    // Find the logged-in user using session
+    const user = await userModel.findOne({ username: req.session.passport.user });
+
+     // ✅ Correctly save filename
+    user.qrcode = req.file.filename;
+
+    await user.save(); // Save the QR code to the database
+
+    res.redirect('/dashboard'); // Redirect to dashboard after successful upload
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
 module.exports = router; // Export router to be used in main app

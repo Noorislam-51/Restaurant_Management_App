@@ -8,9 +8,9 @@ const flash = require('connect-flash');
 const expressSession = require("express-session");
 
 
+var userModel = require('./models/User');
 
 var indexRouter = require('./routes/index');
-var userModel = require('./models/User');
 const authRouter = require('./routes/auth');
 const uploadRouter = require('./routes/menu');
 const cartRouter = require('./routes/cart');
@@ -26,8 +26,9 @@ app.use(flash());
 
 app.use(expressSession({
   resave: false,
-  saveUninitialized: false,
-  secret: "hello hello baaye baaye"
+  saveUninitialized: true,
+  secret: "hello hello baaye baaye",
+  
 }));
 app.use(passport.initialize());
 app.use(passport.session());

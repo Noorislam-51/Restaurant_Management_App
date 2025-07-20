@@ -6,7 +6,16 @@ const customerDetailSchema = new mongoose.Schema({
   customername: String,
   customerphone: Number,
   seatnumber: Number,
-  amount:Number
+  amount: Number,
+  cart: {
+    items: [{ name: String, quantity: Number, price: Number }],
+    totalQty: Number,
+    totalPrice: Number
+  },
+  createdAt: {  
+    type: Date,
+    default: Date.now
+  }
 
 });
 

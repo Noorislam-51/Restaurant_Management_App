@@ -1,37 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Thank You</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    /* Simple popup style */
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      border: 2px solid #444;
+      padding: 20px 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      z-index: 1000;
+      display: none;
     }
 
-    body {
-      background-color: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh; /* Full viewport height */
+    .popup.show {
+      display: block;
     }
 
-    img {
-      height: 70vh;
-      width: 70vw;
-      /* object-fit: contain; */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 999;
+      display: none;
+    }
+
+    .popup-overlay.show {
+      display: block;
+    }
+
+    .popup button {
+      margin-top: 15px;
     }
   </style>
 </head>
-
 <body>
-  <img
-    src="https://images.unsplash.com/photo-1549032305-e816fabf0dd2?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    alt="">
-</body>
 
+  <div class="popup-overlay" id="popupOverlay"></div>
+  <div class="popup" id="popup">
+    <h2>Thank you for your order!</h2>
+    <p>Your order has been placed successfully.</p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+
+  <script>
+    window.onload = function () {
+      document.getElementById("popupOverlay").classList.add("show");
+      document.getElementById("popup").classList.add("show");
+    };
+
+    function closePopup() {
+      document.getElementById("popupOverlay").classList.remove("show");
+      document.getElementById("popup").classList.remove("show");
+    }
+  </script>
+
+</body>
 </html>
