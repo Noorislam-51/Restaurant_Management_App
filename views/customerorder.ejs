@@ -126,6 +126,54 @@
       min-width: 35px;
     }
 
+    .delivery-switch {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .delivery-toggle {
+      transform: scale(1.3);
+      cursor: pointer;
+    }
+
+    .delivery-toggle:checked {
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+
+    .delivery-toggle:not(:checked) {
+      background-color: #ffc107;
+      border-color: #ffc107;
+    }
+
+    .delivery-label {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0;
+    }
+
+    .delivery-text {
+      color: #6c757d;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .delivery-toggle:checked + .delivery-label .delivery-text {
+      color: #28a745;
+    }
+
+    .delivery-toggle:not(:checked) + .delivery-label .delivery-text {
+      color: #ffc107;
+    }
+
     .remove-btn {
       background: linear-gradient(135deg, #ff4757, #ff3742);
       border: none;
@@ -168,6 +216,14 @@
       .custom-table td {
         padding: 0.7rem 0.5rem;
       }
+
+      .delivery-switch {
+        gap: 0.3rem;
+      }
+
+      .delivery-toggle {
+        transform: scale(1.1);
+      }
     }
 
     .stats-card {
@@ -184,6 +240,23 @@
       font-size: 2.5rem;
       font-weight: 700;
       margin-bottom: 0.5rem;
+    }
+
+    .loading-spinner {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .delivery-switch.loading {
+      position: relative;
+      opacity: 0.7;
+    }
+
+    .delivery-switch.loading .loading-spinner {
+      display: block;
     }
   </style>
 </head>
@@ -209,7 +282,7 @@
 
       <!-- Orders Table -->
       <div class="table-container">
-        <% if (customers && customers.length> 0) { %>
+        <% if (customers && customers.length > 0) { %>
           <table class="table custom-table">
             <thead>
               <tr>
@@ -217,11 +290,12 @@
                 <th><i class="fas fa-user me-2"></i>Customer</th>
                 <th><i class="fas fa-shopping-bag me-2"></i>Orders</th>
                 <th><i class="fas fa-sort-numeric-up me-2"></i>Quantities</th>
+                <th><i class="fas fa-truck me-2"></i>Delivery Status</th>
                 <th><i class="fas fa-cog me-2"></i>Actions</th>
               </tr>
             </thead>
             <tbody>
-              <% customers.forEach(c=> { %>
+              <% customers.forEach(c => { %>
                 <tr>
                   <td>
                     <span class="seat-badge">
@@ -235,59 +309,91 @@
                     </div>
                   </td>
                   <td>
-                    <% c.cart.items.forEach(item=> { %>
+                    <% c.cart.items.forEach(item => { %>
                       <div class="order-item">
                         <i class="fas fa-utensils me-2"></i>
                         <%= item.name %>
                       </div>
-                      <% }) %>
+                    <% }) %>
                   </td>
                   <td>
-                    <% c.cart.items.forEach(item=> { %>
+                    <% c.cart.items.forEach(item => { %>
                       <div class="quantity-badge">
                         × <%= item.quantity %>
                       </div>
-                      <% }) %>
+                    <% }) %>
                   </td>
                   <td>
-                    <form action="/orders/delete/<%= c._id %>" method="POST">
-                      <button type="submit" class="btn btn-remove btn-sm text-black">Remove</button>
+                     <div class="delivery-switch">
+                      <input class="form-check-input delivery-toggle" type="checkbox" role="switch" 
+                             id="delivery-<%= c._id %>" 
+                             data-order-id="<%= c._id %>">
+                      <label class="form-check-label delivery-label" for="delivery-<%= c._id %>">
+                        <span class="delivery-text">
+                          <i class="fas fa-clock"></i>
+                       
+                        </span>
+                      </label>
+                      <div class="loading-spinner">
+                        <i class="fas fa-spinner fa-spin"></i>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <form action="/orders/delete/<%= c._id %>" method="POST" style="display: inline;">
+                      <button type="submit" class="remove-btn" >
+                        <i class="fas fa-trash-alt me-2"></i>
+                        Remove
+                      </button>
                     </form>
                   </td>
                 </tr>
-                <% }) %>
+              <% }) %>
             </tbody>
           </table>
-          <% } else { %>
-            <div class="empty-state">
-              <i class="fas fa-inbox"></i>
-              <h3>No Orders Found</h3>
-              <p class="text-muted">There are currently no customer orders to display.</p>
-            </div>
-            <% } %>
+        <% } else { %>
+          <div class="empty-state">
+            <i class="fas fa-inbox"></i>
+            <h3>No Orders Found</h3>
+            <p class="text-muted">There are currently no customer orders to display.</p>
+          </div>
+        <% } %>
       </div>
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Update order count
-    document.addEventListener('DOMContentLoaded', function () {
-      const orderRows = document.querySelectorAll('tbody tr');
-      document.getElementById('totalOrders').textContent = orderRows.length;
+   document.addEventListener('DOMContentLoaded', function () {
+  // Update order count
+  const orderRows = document.querySelectorAll('tbody tr');
+  document.getElementById('totalOrders').textContent = orderRows.length;
 
-      // Add loading state to remove buttons
-      document.querySelectorAll('.remove-btn').forEach(btn => {
-        btn.addEventListener('click', function (e) {
-          if (confirm('Are you sure you want to remove this order?')) {
-            this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Removing...';
-            this.disabled = true;
-          } else {
-            e.preventDefault();
-          }
-        });
+  // Remove order on button click (no confirmation, no spinner)
+  document.querySelectorAll('.remove-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+      const orderId = this.getAttribute('data-order-id');
+      fetch(`/orders/remove/${orderId}`, { method: 'POST' });
+    });
+  });
+
+  // Toggle delivery status (no feedback, no checks)
+  document.querySelectorAll('.delivery-toggle').forEach(toggle => {
+    toggle.addEventListener('change', function () {
+      const orderId = this.getAttribute('data-order-id');
+      const isDelivered = this.checked;
+
+      fetch(`/orders/delivery/${orderId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ delivered: isDelivered })
       });
     });
+  });
+});
+
   </script>
 </body>
 

@@ -46,7 +46,7 @@
   top: 3.4rem;
   height: 0.8rem;
   width: 6rem;
-  border-top: 5px solid #d9480f;
+  border-top: 5px solid #23245a;
   z-index: -1;
 }
 
@@ -63,22 +63,28 @@
 }
 
 .menu-card .card {
-  background-color: #f4eae2;
+  background-color: hsl(0, 100%, 100%);
   border-radius: 1.5rem;
   transition: transform 0.2s;
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.5);
+  /* Bootstrap’s shadow-lg equivalent */
 }
+
 .menu-card .card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 .75rem 1.5rem rgba(0, 0, 0, 0.4);
+  /* Slightly stronger shadow on hover */
 }
+
 .menu-card img {
   border-radius: 1.5rem;
   object-fit: cover;
   height: 160px;
 }
+
 .menu-card .btn {
   border-radius: 999px;
-  background: linear-gradient(135deg, #ff6a00, #ff914d);
-  color: white;
+
+   color: white;
+
 }
-
-

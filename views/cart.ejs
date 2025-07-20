@@ -40,14 +40,14 @@
                 <p class="text-muted mb-1 small"><%= item.menucategory %></p>
                 <p class="fw-bold text-success mb-2">$<%= item.menuprice %></p>
 
-                <div class="d-flex align-items-center gap-2 mb-3">
+                <div class="d-flex align-items-center  gap-2 mb-3">
                   <form action="/cart/decrease/<%= item._id %>" method="POST">
-                    <button class="btn btn-outline-secondary btn-sm rounded-circle px-2">−</button>
+                    <button class="btn btn-outline-secondary text-primary btn-sm rounded-circle px-2">−</button>
                   </form>
                   <span class="fw-semibold small">Qty: <%= item.quantity %></span>
                   <form action="/cart/add/<%= item._id %>" method="POST">
                     <input type="hidden" name="quantity" value="1">
-                    <button class="btn btn-outline-secondary btn-sm rounded-circle px-2">+</button>
+                    <button class="btn btn-outline-secondary  text-primary btn-sm rounded-circle px-2">+</button>
                   </form>
                 </div>
 

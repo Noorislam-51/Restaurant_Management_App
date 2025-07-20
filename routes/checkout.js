@@ -16,7 +16,10 @@ router.post("/checkout", isLoggedIn, async (req, res) => {
 router.post("/checkout-add", async (req, res) => {
   try {
     const { customername, customerphone, seatnumber, amount } = req.body;
+    const user = await userModel.findOne({ username: req.session.passport.user });
+
     const newCustomer = new customerDetail({
+      username: user.username,
       customername,
       customerphone,
       seatnumber,
@@ -59,13 +62,34 @@ router.get("/thank-you", async (req, res) => {
 
 
 // GET all customer orders
-router.get("/orders", async (req, res) => {
-  const allCustomers = await customerDetail.find({});
-const customers = allCustomers.filter(c => c.cart && c.cart.items.length > 0);
 
-res.render("customerorder", { customers });
+// router.get("/orders", async (req, res) => {
+//   const allCustomers = await customerDetail.find({});
+//     const user = await userModel.findOne({ username: req.session.passport.user });
 
+//   const customers = allCustomers.filter(c => c.cart && c.cart.items.length > 0);
+
+//   res.render("customerorder", { customers });
+
+// });
+router.get("/orders", isLoggedIn, async (req, res) => {
+  const user = await userModel.findOne({ username: req.session.passport.user });
+
+  let customers;
+
+  if (user.role === "admin") {
+    const allCustomers = await customerDetail.find({});
+    customers = allCustomers.filter(c => c.cart && c.cart.items.length > 0);
+  } else {
+    customers = await customerDetail.find({
+      username: user.username,
+      "cart.items.0": { $exists: true } // ensures cart is not empty
+    });
+  }
+
+  res.render("customerorder", { customers });
 });
+
 
 // DELETE a customer order
 router.post("/orders/delete/:id", async (req, res) => {
