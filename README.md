@@ -21,17 +21,17 @@ A responsive and feature-rich full-stack Restaurant Management Web Application t
 ## 🧰 Preview
 <table>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/86be77c9-d21b-4390-ad8f-266648299f4a" width="100%"></td>
-    <td><img src="https://github.com/user-attachments/assets/64f60a68-1d86-4d99-9431-7d73d25e457c" width="100%"></td>
+    <td><img src="./public/images/preview/Screenshot 2025-07-24 181625.png" width="100%"></td>
+    <td><img src="/public/images/preview/Screenshot 2025-07-24 181647.png" width="100%"></td>
  
   </tr>
     <tr>
-      <td><img src="https://github.com/user-attachments/assets/5347099e-bbd6-4d84-bec6-3302bbec07d2" width="100%"></td>
-      <td><img src="https://github.com/user-attachments/assets/0ff71c4d-4932-4e9d-af13-2d781700abe5" width="100%"></td>
+      <td><img src="/public/images/preview/Screenshot 2025-07-24 181712.png" width="100%"></td>
+      <td><img src="/public/images/preview/Screenshot 2025-07-24 181806.png" width="100%"></td>
   </tr>
   <tr>
-     <td><img src="https://github.com/user-attachments/assets/1750b619-55b1-4ec8-bc59-2ecf02717305" width="100%"></td>
-     <td><img src="https://github.com/user-attachments/assets/b2f73a79-342e-4729-a144-3e7b810b0b64" width="100%"></td>
+     <td><img src="/public/images/preview/Screenshot 2025-07-24 181821.png" width="100%"></td>
+     <td><img src="/public/images/preview/Screenshot 2025-07-24 181849.png" width="100%"></td>
   </tr>
 </table>
 
