@@ -1,3 +1,7 @@
+require('dotenv').config();
+
+
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -7,6 +11,8 @@ const passport = require("passport");
 const flash = require('connect-flash');
 const expressSession = require("express-session");
 
+const connectDB = require('./config/db');
+connectDB();
 
 var userModel = require('./models/User');
 
@@ -48,6 +54,8 @@ app.use('/', authRouter);
 app.use('/', uploadRouter);
 app.use('/', cartRouter);
 app.use('/', checkoutRouter);
+app.get('/health', (req, res) => res.send('ok'));
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
