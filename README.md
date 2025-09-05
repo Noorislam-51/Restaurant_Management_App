@@ -56,10 +56,6 @@ A responsive and feature-rich full-stack Restaurant Management Web Application t
 
 
 
-## 💻 GitHub Repository
-🔗 [GitHub Code](https://github.com/your-username/restaurant-management-app)
-
----
 
 ## 📦 Installation and Setup
 
