@@ -14,7 +14,7 @@
 
     userModel.register(newUser, password, function (err, user) {
       if (err) {
-        console.log(err);
+        console.log(err); 
         return res.redirect("/dashboard");
       }
       passport.authenticate("local")(req, res, function () {
